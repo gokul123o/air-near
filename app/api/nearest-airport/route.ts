@@ -74,9 +74,24 @@ export async function GET(request: NextRequest) {
       { status: 404 }
     );
   }
-
-  return NextResponse.json({
+const response= NextResponse.json({
     nearestAirport,
     distance_km: parseFloat(minDistance.toFixed(2)),
   });
+
+// Set CORS headers
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  return response;
+}
+
+// Handle OPTIONS method for preflight requests
+export function OPTIONS() {
+  const response = new NextResponse(null, { status: 204 });
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+  return response;
 }
