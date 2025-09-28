@@ -87,7 +87,7 @@ const response= NextResponse.json({
   return response;
 }
 
-// Handle OPTIONS method for preflight requests
+// Handle OPTIONS 
 export function OPTIONS() {
   const response = new NextResponse(null, { status: 204 });
   response.headers.set('Access-Control-Allow-Origin', '*');
